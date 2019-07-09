@@ -2,7 +2,7 @@ replicaCount: 3
 
 image:
   repository: smartcitiesdata/discovery_streams
-  tag: 2.0.3
+  tag: 2.0.4
   pullPolicy: Always
 
 smokeTestImage:
