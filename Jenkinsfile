@@ -70,7 +70,8 @@ def deployTo(environment, internal, extraArgs = '') {
                 --set ingress.dnsZone="${dnsZone}" \
                 --set ingress.root_dns_zone="${rootDnsZone}" \
                 --set ingress.certificateARN="${certificateARNs}" \
-                 --values=discovery-streams.yaml \
+                --set-file dashboard.content=dashboard-content.json \
+                --values=discovery-streams.yaml \
                 ${extraArgs}
         """.trim())
     }
@@ -92,7 +93,8 @@ def doDryRun(environment = "dev") {
                 --set ingress.dnsZone="smartos.example" \
                 --set ingress.root_dns_zone="rootsmartos.example" \
                 --set ingress.certificateARN="certa" \
-                 --values=discovery-streams.yaml \
+                --set-file dashboard.content=dashboard-content.json \
+                --values=discovery-streams.yaml \
             > template.validate
 
             kubectl apply -f template.validate --dry-run=true
