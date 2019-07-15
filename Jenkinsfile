@@ -59,7 +59,9 @@ def deployTo(environment, internal, extraArgs = '') {
         sh("""#!/bin/bash
             set -e
             helm init --client-only
-            helm upgrade --install discovery-streams ./chart \
+            helm repo add scdp https://smartcitiesdata.github.io/charts
+            helm repo update
+            helm upgrade --install scdp/discovery-streams  \
                 --namespace=discovery \
                 --set ingress.enabled="true" \
                 --set ingress.scheme="${ingressScheme}" \
@@ -79,7 +81,9 @@ def doDryRun(environment = "dev") {
             sh("""#!/bin/bash
             set -e
             helm init --client-only
-            helm template ./chart \
+            helm repo add scdp https://smartcitiesdata.github.io/charts
+            helm repo update
+            helm template scdp/discovery-streams  \
                 --namespace=discovery \
                 --set ingress.enabled="true" \
                 --set ingress.scheme="internal" \

@@ -1,5 +1,3 @@
-replicaCount: 3
-
 image:
   repository: smartcitiesdata/discovery_streams
   tag: 2.0.5
@@ -8,24 +6,19 @@ image:
 smokeTestImage:
   repository: smartcitiesdata/discovery_streams_smoke_test
   tag: 2.0.3
-  pullPolicy: Always
-
-ingress:
-  enabled: false
-  scheme: ""
-  subnets: ""
-  securityGroups: ""
-  certificateARN: ""
-  dnsZone: "localhost"
-  root_dns_zone: "localhost"
-
-service:
-  type: NodePort
-  port: 80
-  targetPort: 4000
 
 kafka:
   brokers: "streaming-service-public-kafka-bootstrap.streaming-public:9092"
 
-dashboard:
-  title: "COTA Streaming Metrics"
+replicaCount: 3
+
+resources:
+  limits:
+    memory: 512Mi
+    cpu: 300m
+  requests:
+    memory: 512Mi
+    cpu: 100m
+
+smokeTestImage:
+  tag: 2.0.3
