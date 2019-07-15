@@ -21,9 +21,7 @@ def doStageIfRelease = doStageIf.curry(scos.changeset.isRelease)
 node('infrastructure') {
     ansiColor('xterm') {
         scos.doCheckoutStage()
-        if(env.BRANCH_NAME.matches("PR-\\d*")) {
-            doDryRun()
-        }
+
         doStageIfDeployingToDev('Deploy to Dev') {
             deployTo('dev', true, "--set image.tag=${env.DEV_IMAGE_TAG} --recreate-pods")
         }
@@ -61,7 +59,7 @@ def deployTo(environment, internal, extraArgs = '') {
             helm init --client-only
             helm repo add scdp https://smartcitiesdata.github.io/charts
             helm repo update
-            helm upgrade --install scdp/discovery-streams  \
+            helm upgrade --install discovery-streams scdp/discovery-streams  \
                 --namespace=discovery \
                 --set ingress.enabled="true" \
                 --set ingress.scheme="${ingressScheme}" \
@@ -73,31 +71,6 @@ def deployTo(environment, internal, extraArgs = '') {
                 --set-file dashboard.content=dashboard-content.json \
                 --values=discovery-streams.yaml \
                 ${extraArgs}
-        """.trim())
-    }
-}
-
-def doDryRun(environment = "dev") {
-    scos.withEksCredentials(environment) {
-            sh("""#!/bin/bash
-            set -e
-            helm init --client-only
-            helm repo add scdp https://smartcitiesdata.github.io/charts
-            helm repo update
-            helm template scdp/discovery-streams  \
-                --namespace=discovery \
-                --set ingress.enabled="true" \
-                --set ingress.scheme="internal" \
-                --set ingress.subnets="subnet-a" \
-                --set ingress.securityGroups="sg-a" \
-                --set ingress.dnsZone="smartos.example" \
-                --set ingress.root_dns_zone="rootsmartos.example" \
-                --set ingress.certificateARN="certa" \
-                --set-file dashboard.content=dashboard-content.json \
-                --values=discovery-streams.yaml \
-            > template.validate
-
-            kubectl apply -f template.validate --dry-run=true
         """.trim())
     }
 }
