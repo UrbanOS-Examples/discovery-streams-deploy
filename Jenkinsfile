@@ -68,7 +68,6 @@ def deployTo(environment, internal, extraArgs = '') {
                 --set ingress.dnsZone="${dnsZone}" \
                 --set ingress.root_dns_zone="${rootDnsZone}" \
                 --set ingress.certificateARN="${certificateARNs}" \
-                --set-file dashboard.content=dashboard-content.json \
                 --values=discovery-streams.yaml \
                 ${extraArgs}
         """.trim())
