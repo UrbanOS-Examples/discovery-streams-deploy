@@ -534,7 +534,7 @@
         ]
     },
     "timezone": "",
-    "title": "{{ .Values.dashboard.title }}",
+    "title": "COTA Streaming Metrics",
     "uid": "i0FCBiPmk",
     "version": 1
 }
