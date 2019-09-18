@@ -55,12 +55,12 @@ def deployTo(environment, internal, extraArgs = '') {
         def rootDnsZone = terraformOutputs.root_dns_zone_name.value
 
         sh("""#!/bin/bash
-            set -e
+            set -ex
             helm init --client-only
             helm repo add scdp https://smartcitiesdata.github.io/charts
             helm repo update
             helm upgrade --install discovery-streams scdp/discovery-streams  \
-                --version 0.1.3 \
+                --version 0.1.4 \
                 --namespace=discovery \
                 --set ingress.enabled="true" \
                 --set ingress.scheme="${ingressScheme}" \
