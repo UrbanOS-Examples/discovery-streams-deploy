@@ -60,7 +60,7 @@ def deployTo(environment, internal, extraArgs = '') {
             helm repo add scdp https://smartcitiesdata.github.io/charts
             helm repo update
             helm upgrade --install discovery-streams scdp/discovery-streams  \
-                --version 0.2.0 \
+                --version 0.2.1 \
                 --namespace=discovery \
                 --set ingress.enabled="true" \
                 --set ingress.scheme="${ingressScheme}" \
