@@ -14,7 +14,7 @@ resources:
     cpu: 300m
   requests:
     memory: 512Mi
-    cpu: 100m
+    cpu: 300m
 
 redis:
   host: redis.external-services
