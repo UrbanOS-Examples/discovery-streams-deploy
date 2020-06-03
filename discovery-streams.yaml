@@ -1,6 +1,6 @@
 image:
   repository: smartcitiesdata/discovery_streams
-  tag: 2.4.0
+  tag: 2.4.2
   pullPolicy: Always
 
 kafka:
