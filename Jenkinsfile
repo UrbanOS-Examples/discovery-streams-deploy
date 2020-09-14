@@ -53,6 +53,7 @@ def deployTo(environment, internal, extraArgs = '') {
         def ingressScheme = internal ? 'internal' : 'internet-facing'
         def dnsZone = terraformOutputs.internal_dns_zone_name.value
         def rootDnsZone = terraformOutputs.root_dns_zone_name.value
+        def rootWAFACLARN = terraformOutputs.eks_cluster_waf_acl_arn.value
 
         sh("""#!/bin/bash
             set -ex
@@ -69,6 +70,7 @@ def deployTo(environment, internal, extraArgs = '') {
                 --set ingress.dnsZone="${dnsZone}" \
                 --set ingress.root_dns_zone="${rootDnsZone}" \
                 --set ingress.certificateARN="${certificateARNs}" \
+                --set ingress.waf_acl_arn="${rootWAFACLARN}" \
                 --values=discovery-streams.yaml \
                 ${extraArgs}
         """.trim())
