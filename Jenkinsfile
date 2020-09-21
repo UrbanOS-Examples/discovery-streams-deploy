@@ -58,7 +58,7 @@ def deployTo(environment, internal, extraArgs = '') {
         sh("""#!/bin/bash
             set -ex
             helm init --client-only
-            helm repo add scdp https://smartcitiesdata.github.io/charts
+            helm repo add scdp https://datastillery.github.io/charts
             helm repo update
             helm upgrade --install discovery-streams scdp/discovery-streams  \
                 --version 0.3.0 \
