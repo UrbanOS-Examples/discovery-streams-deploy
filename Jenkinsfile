@@ -57,7 +57,7 @@ def deployTo(environment, internal, extraArgs = '') {
 
         sh("""#!/bin/bash
             set -ex
-            helm repo add scdp https://datastillery.github.io/charts
+            helm repo add scdp https://urbanos-public.github.io/charts
             helm repo update
             helm upgrade --install discovery-streams scdp/discovery-streams  \
                 --version 0.3.1 \
