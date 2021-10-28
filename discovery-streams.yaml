@@ -1,6 +1,6 @@
 image:
   repository: smartcitiesdata/discovery_streams
-  tag: 2.10.8
+  tag: 3.0.0
   pullPolicy: IfNotPresent
 
 kafka:
