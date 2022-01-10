@@ -18,3 +18,7 @@ resources:
 
 redis:
   host: redis.external-services
+
+global:
+  auth:
+    raptor_url: "http://raptor.admin/api/authorize"
